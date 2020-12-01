@@ -1,4 +1,4 @@
-import Cookies from 'Cookies';
+import Cookies from 'cookies';
 
 const client_id = process.env.SPOTIFY_CLIENT_ID;
 const client_secret = process.env.SPOTIFY_CLIENT_SECRET;
