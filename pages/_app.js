@@ -1,5 +1,5 @@
 import '../styles/globals.css'
-import { AuthProvider } from '../providers/authProvider';
+import { AuthProvider } from '../src/providers/authProvider';
 import App from 'next/app';
 import Cookies from 'cookies';
 import { getSpotifyAuthData } from '../src/helper/fetch';

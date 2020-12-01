@@ -1,11 +1,11 @@
 import Head from 'next/head';
 import styles from '../styles/Home.module.css';
-import { getAccessToken } from '../providers/authProvider';
+import SearchContainer from '../src/components/SearchContainer';
+import { getAccessToken } from '../src/providers/authProvider'
 
-function Home() {    
-  // Retrieve access token from context;
-  let accessToken = getAccessToken();
-
+function Home() {  
+  
+  const accessToken = getAccessToken();
   return (
     <div className={styles.container}>
       <Head>
@@ -17,6 +17,7 @@ function Home() {
         <h1 className={styles.title}>
           Music Genre Guesser
         </h1>
+        <SearchContainer accessToken={accessToken} />
       </main>
 
       <footer className={styles.footer}>
