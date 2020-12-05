@@ -8,7 +8,7 @@ export default class AppContextProvider extends Component {
 
     this.state = {
       accessToken: this.props.accessToken,
-      artist: {}
+      artist: null
     };
   }
 

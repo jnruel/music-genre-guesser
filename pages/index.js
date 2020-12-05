@@ -1,8 +1,20 @@
 import Head from 'next/head';
 import styles from '../src/styles/Home.module.css';
-import SearchContainer from '../src/components/SearchContainer';
+import ArtistSearchForm from '../src/components/ArtistSearchForm';
+import { useContext, useEffect } from 'react';
+import { AppContext } from '../src/contexts/AppContext';
 
 function Home() {
+  const appContext = useContext(AppContext);
+
+  // Handle when artist context gets set.
+  useEffect(() => {
+    if (appContext.artist !== null) {
+      // TODO.
+      console.log(appContext.artist);
+    }
+  }, [appContext]);
+
   return (
     <div className={styles.container}>
       <Head>
@@ -14,7 +26,7 @@ function Home() {
         <h1 className={styles.title}>
           Music Genre Guesser
         </h1>
-        <SearchContainer />
+        <ArtistSearchForm />
       </main>
 
       <footer className={styles.footer}>

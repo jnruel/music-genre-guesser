@@ -10,7 +10,7 @@ const renderSuggestion = suggestion => (
   </div>
 );
 
-export default class SearchContainer extends Component {
+export default class ArtistSearchForm extends Component {
   static contextType = AppContext;
 
   constructor() {
@@ -83,6 +83,7 @@ export default class SearchContainer extends Component {
     return suggestion.name
   };
 
+  // Click button to get artist. Update context with artist obj.
   handleClick = async () => {
     // TODO: error handling.
     let artist = await getArtist(this.state.accessToken, this.state.selected_artist.id);
