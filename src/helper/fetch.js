@@ -14,3 +14,26 @@ export const getSpotifyAuthData = async () => {
 
   return data;
 }
+
+export const getArtist = async (accessToken, id) => {
+  const url = 'https://api.spotify.com/v1/artists/';
+
+  const response = await fetch(url + id, {
+    method: 'GET',
+    headers: {
+      'Authorization': 'Bearer ' + accessToken,
+      'Content-Type': 'application/json'
+    }
+  });
+
+  const artist = await response.json();
+  return artist;
+
+  // TODO:
+  // if (artist.genres.length > 0) {
+  //   setArtist(artist);
+  // }
+  // else {
+  //   console.log('no genres');
+  // }
+};

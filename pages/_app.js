@@ -1,15 +1,14 @@
-import '../styles/globals.css'
-import { AuthProvider } from '../src/providers/authProvider';
+import '../src/styles/globals.css'
+import AppContextProvider from '../src/contexts/AppContext';
 import App from 'next/app';
 import Cookies from 'cookies';
 import { getSpotifyAuthData } from '../src/helper/fetch';
 
-
 function MyApp({ Component, pageProps, accessToken }) {
   return (
-    <AuthProvider newAccessToken={accessToken}>
+    <AppContextProvider accessToken={accessToken}>
       <Component {...pageProps} />
-    </AuthProvider>    
+    </AppContextProvider>
   );
 }
 
@@ -27,7 +26,7 @@ MyApp.getInitialProps = async (appContext) => {
     else {
       const data = await getSpotifyAuthData();
       accessToken = data.access_token;
-      
+
       // Generate new cookie.
       let expiresDate = new Date();
       expiresDate.setSeconds(expiresDate.getSeconds() + data.expires_in);
