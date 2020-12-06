@@ -37,3 +37,18 @@ export const getArtist = async (accessToken, id) => {
   //   console.log('no genres');
   // }
 };
+
+export const getRelatedArtists = async(accessToken, id) => {
+  const url = `https://api.spotify.com/v1/artists/${id}/related-artists`;
+
+  const response = await fetch(url, {
+    method: 'GET',
+    headers: {
+      'Authorization': 'Bearer ' + accessToken,
+      'Content-Type': 'application/json'
+    }
+  });
+
+  const relatedArtists = await response.json();
+  return relatedArtists.artists;
+}
