@@ -3,6 +3,7 @@ import Autosuggest from 'react-autosuggest';
 import { getArtist } from '../helper/fetch';
 import { debounce } from 'lodash';
 import { AppContext } from '../contexts/AppContext';
+import theme from  '../styles/AutoSuggest.module.css';
 
 const renderSuggestion = suggestion => (
   <div>
@@ -40,7 +41,7 @@ export default class ArtistSearchForm extends Component {
     const paramsObject = {
       q: value,
       type: 'artist',
-      limit: 10
+      limit: 5
     };
 
     let params = new URLSearchParams(paramsObject);
@@ -110,6 +111,7 @@ export default class ArtistSearchForm extends Component {
           getSuggestionValue={this.getSuggestionValue}
           renderSuggestion={renderSuggestion}
           inputProps={inputProps}
+          theme={theme}
         />
 
         <button onClick={this.handleClick}>Submit</button>

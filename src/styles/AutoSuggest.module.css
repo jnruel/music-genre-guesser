@@ -1,0 +1,33 @@
+.container {
+  width: 100%;
+}
+
+.input {
+  width: 100%;
+  height: 45px;
+  font-size: 18px;
+  padding: 5px 10px;
+}
+
+.suggestionsContainer {
+  width: 100%;
+  border: 1px solid black;
+}
+
+.suggestionsList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  font-size: 16px;
+}
+
+.suggestion {
+  cursor: pointer;
+  padding: 5px 10px;
+
+}
+
+.suggestionHighlighted {
+  background-color: black;
+  color: white;
+}
