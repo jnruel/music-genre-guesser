@@ -1,5 +1,6 @@
 .container {
   width: 100%;
+  position: relative;
 }
 
 .input {
@@ -10,7 +11,9 @@
 }
 
 .suggestionsContainer {
+  position: absolute;
   width: 100%;
+  left: 0;
   border: 1px solid black;
 }
 

@@ -1,5 +1,7 @@
 import { useState, useEffect } from 'react';
 import { getRelatedArtists } from '../helper/fetch';
+import GenreButton from '../components/GenreButton';
+import styles from '../styles/GenreQuiz.module.css';
 
 export default function ArtistGenreQuiz(props) {
   const artist = props.artist;
@@ -26,16 +28,17 @@ export default function ArtistGenreQuiz(props) {
   }, [artist]);
 
   return (
-    <div>
+    <div className={styles.container}>
       <h2>{artist.name} ({artist.genres.length} genres)</h2>
       <img src={artist.images[2].url}></img>
 
       <h3>Available Genres</h3>
-      <ul>
+      <div>
         {genres.map((genre, index) => {
-          return <li key={index}>{genre}</li>
+          const key = artist.name.replace(' ', '_') + '_' + index;
+          return <GenreButton key={key} genre={genre}/>
         })}
-      </ul>
+      </div>
     </div>
-  )
+  );
 }

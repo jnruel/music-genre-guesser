@@ -3,7 +3,8 @@ import Autosuggest from 'react-autosuggest';
 import { getArtist } from '../helper/fetch';
 import { debounce } from 'lodash';
 import { AppContext } from '../contexts/AppContext';
-import theme from  '../styles/AutoSuggest.module.css';
+import autoSuggestStyles from  '../styles/AutoSuggest.module.css';
+import artistSearchStyles from  '../styles/ArtistSearchForm.module.css';
 
 const renderSuggestion = suggestion => (
   <div>
@@ -85,7 +86,8 @@ export default class ArtistSearchForm extends Component {
   };
 
   // Click button to get artist. Update context with artist obj.
-  handleClick = async () => {
+  handleSubmit = async (event) => {
+    event.preventDefault();
     // TODO: error handling.
     let artist = await getArtist(this.state.accessToken, this.state.selected_artist.id);
     this.context.setArtist(artist);
@@ -103,7 +105,7 @@ export default class ArtistSearchForm extends Component {
 
     // Finally, render it!
     return (
-      <>
+      <form onSubmit={this.handleSubmit} className={artistSearchStyles.form}>
         <Autosuggest
           suggestions={suggestions}
           onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
@@ -111,11 +113,11 @@ export default class ArtistSearchForm extends Component {
           getSuggestionValue={this.getSuggestionValue}
           renderSuggestion={renderSuggestion}
           inputProps={inputProps}
-          theme={theme}
+          theme={autoSuggestStyles}
         />
 
-        <button onClick={this.handleClick}>Submit</button>
-      </>
+        <button className={artistSearchStyles.button} type="submit">Submit</button>
+      </form>
     );
   }
 }
