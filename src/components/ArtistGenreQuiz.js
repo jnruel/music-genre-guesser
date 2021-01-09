@@ -23,9 +23,35 @@ export default function ArtistGenreQuiz(props) {
       }
     });
 
+    // alpha sort
+    relatedGenres.sort();
+
+    // Loop genres and transform into objects for selected state manangement
+    let genreObjects = [];
+    relatedGenres.forEach((genre, index) => {
+      let obj = {
+        id: `${artist.id}_${index}`,
+        name: genre,
+        selected: false
+      };
+
+      genreObjects.push(obj);
+    });
+
     // Update state
-    setGenres(relatedGenres.sort());
+    setGenres(genreObjects);
   }, [artist]);
+
+  const toggleSelection = (selectedGenre) => {
+    // Get index of selected genre
+    let selectedIndex = genres.findIndex((genre) => {
+      return genre.id === selectedGenre.id;
+    });
+
+    let updatedGenres = [...genres];
+    updatedGenres[selectedIndex] = selectedGenre;
+    setGenres(updatedGenres);
+  };
 
   return (
     <div className={styles.container}>
@@ -35,8 +61,7 @@ export default function ArtistGenreQuiz(props) {
       <h3>Available Genres</h3>
       <div>
         {genres.map((genre, index) => {
-          const key = artist.name.replace(' ', '_') + '_' + index;
-          return <GenreButton key={key} genre={genre}/>
+          return <GenreButton key={genre.id} genre={genre} toggleSelection={toggleSelection} />
         })}
       </div>
     </div>
