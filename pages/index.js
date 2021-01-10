@@ -8,14 +8,6 @@ import { AppContext } from '../src/contexts/AppContext';
 function Home() {
   const appContext = useContext(AppContext);
 
-  // // Handle when artist context gets set.
-  // useEffect(() => {
-  //   if (appContext.artist !== null) {
-  //     // TODO.
-  //     console.log(appContext.artist);
-  //   }
-  // }, [appContext]);
-
   return (
     <div className={styles.container}>
       <Head>

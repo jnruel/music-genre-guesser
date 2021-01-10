@@ -1,0 +1,27 @@
+.container {
+  max-width: 1000px;
+}
+
+.genreButton {
+  border: 1px solid black;
+  padding: 5px;
+  margin: 2px;
+
+  &.selected {
+    background-color: gray;
+    color: white;
+  }
+
+  &:hover,
+  &.selected:hover {
+    background-color: black;
+    color: white;
+  }
+
+  &:disabled,
+  &:disabled:hover {
+    color: gray;
+    background-color: white;
+    cursor: not-allowed;
+  }
+}

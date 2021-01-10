@@ -1,11 +1,12 @@
 import { useState, useEffect } from 'react';
 import { getRelatedArtists } from '../helper/fetch';
 import GenreButton from '../components/GenreButton';
-import styles from '../styles/GenreQuiz.module.css';
+import styles from '../styles/GenreQuiz.module.scss';
 
 export default function ArtistGenreQuiz(props) {
   const artist = props.artist;
   const [genres, setGenres] = useState([]);
+  const [selectedGenres, setSelectedGenres] = useState([]);
 
   // Call every time artist gets updated.
   useEffect(async () => {
@@ -42,6 +43,13 @@ export default function ArtistGenreQuiz(props) {
     setGenres(genreObjects);
   }, [artist]);
 
+  // Run whenever the genres state updates,
+  // to set selected state.
+  useEffect(async () => {
+    const selected = genres.filter((obj) => obj.selected === true);
+    setSelectedGenres(selected);
+  }, [genres]);
+
   const toggleSelection = (selectedGenre) => {
     // Get index of selected genre
     let selectedIndex = genres.findIndex((genre) => {
@@ -55,13 +63,21 @@ export default function ArtistGenreQuiz(props) {
 
   return (
     <div className={styles.container}>
-      <h2>{artist.name} ({artist.genres.length} genres)</h2>
+      <h2>{artist.name} ({artist.genres.length} genres on Spotify)</h2>
       <img src={artist.images[2].url}></img>
+      <div>Selected {selectedGenres.length} out of {artist.genres.length}</div>
 
       <h3>Available Genres</h3>
       <div>
         {genres.map((genre, index) => {
-          return <GenreButton key={genre.id} genre={genre} toggleSelection={toggleSelection} />
+          // Disable button if at selection max and not already selected
+          // (Allow selected to be clicked in order to deselect)
+          let disabled = false;
+          if (selectedGenres.length === artist.genres.length && genre.selected === false) {
+            disabled = true;
+          }
+
+          return <GenreButton key={genre.id} genre={genre} toggleSelection={toggleSelection} disabled={disabled} />
         })}
       </div>
     </div>
