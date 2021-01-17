@@ -1,7 +1,23 @@
+import classNames from 'classnames/bind';
 import styles from '../styles/GenreQuiz.module.scss';
+
 
 export default function GenreButton(props) {
   const genre = JSON.parse(JSON.stringify(props.genre));
+
+
+  let answer;
+  if (props.submitted) {
+    answer = props.answer;
+  }
+
+  let classes = classNames(
+    styles.genreButton,
+    {
+      [styles.selected]: genre.selected,
+      [styles.answer]: answer
+    }
+  );
 
   const handleClick = () => {
     genre.selected = !genre.selected;
@@ -10,7 +26,7 @@ export default function GenreButton(props) {
 
   return (
     <button
-      className={styles.genreButton + ' ' + (genre.selected ? styles.selected : '')}
+      className={classes}
       onClick={handleClick}
       disabled={props.disabled}
     >

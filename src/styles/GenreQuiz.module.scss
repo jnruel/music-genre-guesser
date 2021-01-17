@@ -7,9 +7,15 @@
   padding: 5px;
   margin: 2px;
 
-  &.selected {
+  &.selected,
+  &.selected:disabled,
+  &.selected:disabled:hover {
     background-color: gray;
     color: white;
+
+    &.answer {
+      background-color: green;
+    }
   }
 
   &:hover,
@@ -23,5 +29,9 @@
     color: gray;
     background-color: white;
     cursor: not-allowed;
+
+    &.answer {
+      background-color: lightgreen;
+    }
   }
 }

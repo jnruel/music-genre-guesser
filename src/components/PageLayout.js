@@ -1,7 +1,6 @@
 
 import Head from 'next/head';
 import styles from '../styles/PageLayout.module.css';
-// import styles from '../styles/GenreQuiz.module.scss';
 
 export default function PageLayout(props) {
   return (

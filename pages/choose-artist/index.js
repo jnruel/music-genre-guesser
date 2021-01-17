@@ -1,9 +1,12 @@
+import { useContext } from 'react';
+import { AppContext } from '../../src/contexts/AppContext';
 import PageLayout from '../../src/components/PageLayout';
 import ArtistSearchForm from '../../src/components/ArtistSearchForm';
 import ArtistGenreQuiz from '../../src/components/ArtistGenreQuiz';
-import { useContext } from 'react';
-import { AppContext } from '../../src/contexts/AppContext';
 
+/**
+ * Choose an Artist page component.
+ */
 function ChooseArtist() {
   const appContext = useContext(AppContext);
 
@@ -13,12 +16,18 @@ function ChooseArtist() {
 
   return (
     <PageLayout title="Music Genre Guesser">
-      <button onClick={reset}>reset artist</button>
+      { appContext.artist !== null &&
+        <button onClick={reset}>reset artist</button>
+      }
 
-      {appContext.artist !== null ? (
-        <ArtistGenreQuiz accessToken={appContext.accessToken} artist={appContext.artist} />
-      ) : (
+
+      {/* Show artist search if no artist is set,
+          or the ArtistGenreQuiz if it is.
+       */}
+      {appContext.artist === null ? (
         <ArtistSearchForm />
+      ) : (
+        <ArtistGenreQuiz accessToken={appContext.accessToken} artist={appContext.artist} />
       )}
     </PageLayout>
   )

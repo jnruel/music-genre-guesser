@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "autoprefixer": "^10.1.0",
+    "classnames": "^2.2.6",
     "cookies": "^0.8.0",
     "lodash": "^4.17.20",
     "next": "10.0.3",

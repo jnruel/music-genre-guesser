@@ -7,7 +7,10 @@ export default function ArtistGenreQuiz(props) {
   const artist = props.artist;
   const [genres, setGenres] = useState([]);
   const [selectedGenres, setSelectedGenres] = useState([]);
-  const [submitted, setSubmitted] = useState(false);
+  const [results, setResults] = useState({
+    submitted: false,
+    numCorrect: null
+  });
 
   // Call every time artist gets updated.
   useEffect(async () => {
@@ -64,7 +67,6 @@ export default function ArtistGenreQuiz(props) {
 
   const submitAnswers = () => {
     if (selectedGenres.length === artist.genres.length) {
-      setSubmitted(true);
       let correct = 0;
       artist.genres.forEach((genre) => {
         selectedGenres.forEach((selectedGenre) => {
@@ -74,7 +76,10 @@ export default function ArtistGenreQuiz(props) {
         });
       });
 
-      console.log(`${correct} out of ${artist.genres.length} correct`);
+      setResults({
+        submitted: true,
+        numCorrect: correct
+      });
     }
   }
 
@@ -90,20 +95,33 @@ export default function ArtistGenreQuiz(props) {
           // Disable button if at selection max and not already selected
           // (Allow selected to be clicked in order to deselect)
           let disabled = false;
-          if (selectedGenres.length === artist.genres.length && (genre.selected === false || submitted === true)) {
+          if (selectedGenres.length === artist.genres.length &&
+            (genre.selected === false || results.submitted === true)) {
             disabled = true;
           }
 
-          return <GenreButton key={genre.id} genre={genre} toggleSelection={toggleSelection} disabled={disabled} />
+          let answer = false;
+          if (artist.genres.includes(genre.name)) {
+            answer = true;
+          }
+
+          return <GenreButton
+                    key={genre.id}
+                    genre={genre}
+                    toggleSelection={toggleSelection}
+                    answer={answer}
+                    submitted={results.submitted}
+                    disabled={disabled}
+                  />
         })}
       </div>
 
-      {selectedGenres.length === artist.genres.length && !submitted &&
+      {selectedGenres.length === artist.genres.length && !results.submitted &&
         <button onClick={submitAnswers}>Submit</button>
       }
 
-      {submitted &&
-        <div>submitted</div>
+      {results.submitted &&
+        <div>{`You got ${results.numCorrect} out of ${artist.genres.length} genres correct`}</div>
       }
     </div>
   );
