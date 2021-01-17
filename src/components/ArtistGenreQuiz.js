@@ -7,6 +7,7 @@ export default function ArtistGenreQuiz(props) {
   const artist = props.artist;
   const [genres, setGenres] = useState([]);
   const [selectedGenres, setSelectedGenres] = useState([]);
+  const [submitted, setSubmitted] = useState(false);
 
   // Call every time artist gets updated.
   useEffect(async () => {
@@ -61,6 +62,22 @@ export default function ArtistGenreQuiz(props) {
     setGenres(updatedGenres);
   };
 
+  const submitAnswers = () => {
+    if (selectedGenres.length === artist.genres.length) {
+      setSubmitted(true);
+      let correct = 0;
+      artist.genres.forEach((genre) => {
+        selectedGenres.forEach((selectedGenre) => {
+          if (selectedGenre.name === genre) {
+            correct++;
+          }
+        });
+      });
+
+      console.log(`${correct} out of ${artist.genres.length} correct`);
+    }
+  }
+
   return (
     <div className={styles.container}>
       <h2>{artist.name} ({artist.genres.length} genres on Spotify)</h2>
@@ -73,13 +90,21 @@ export default function ArtistGenreQuiz(props) {
           // Disable button if at selection max and not already selected
           // (Allow selected to be clicked in order to deselect)
           let disabled = false;
-          if (selectedGenres.length === artist.genres.length && genre.selected === false) {
+          if (selectedGenres.length === artist.genres.length && (genre.selected === false || submitted === true)) {
             disabled = true;
           }
 
           return <GenreButton key={genre.id} genre={genre} toggleSelection={toggleSelection} disabled={disabled} />
         })}
       </div>
+
+      {selectedGenres.length === artist.genres.length && !submitted &&
+        <button onClick={submitAnswers}>Submit</button>
+      }
+
+      {submitted &&
+        <div>submitted</div>
+      }
     </div>
   );
 }

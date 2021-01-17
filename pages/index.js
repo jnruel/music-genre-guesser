@@ -1,13 +1,8 @@
 import Head from 'next/head';
 import styles from '../src/styles/Home.module.css';
-import ArtistSearchForm from '../src/components/ArtistSearchForm';
-import ArtistGenreQuiz from '../src/components/ArtistGenreQuiz';
-import { useContext, useEffect } from 'react';
-import { AppContext } from '../src/contexts/AppContext';
+import Link from 'next/link';
 
 function Home() {
-  const appContext = useContext(AppContext);
-
   return (
     <div className={styles.container}>
       <Head>
@@ -19,11 +14,10 @@ function Home() {
         <h1 className={styles.title}>
           Music Genre Guesser
         </h1>
-        <ArtistSearchForm />
 
-        {appContext.artist !== null &&
-          <ArtistGenreQuiz accessToken={appContext.accessToken} artist={appContext.artist} />
-        }
+        <Link href="/choose-artist">
+          <a>Choose an Artist</a>
+        </Link>
       </main>
 
       <footer className={styles.footer}>
@@ -32,6 +26,5 @@ function Home() {
     </div>
   )
 }
-
 
 export default Home;
