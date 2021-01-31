@@ -15,9 +15,9 @@ function ChooseArtist() {
   }
 
   return (
-    <PageLayout title="Music Genre Guesser">
+    <PageLayout title="Choose an Artist">
       { appContext.artist !== null &&
-        <button onClick={reset}>reset artist</button>
+        <button onClick={reset}>Reset</button>
       }
 
 

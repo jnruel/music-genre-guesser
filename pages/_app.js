@@ -1,4 +1,4 @@
-import '../src/styles/globals.css'
+import '../src/styles/globals.scss'
 import AppContextProvider from '../src/contexts/AppContext';
 import App from 'next/app';
 import Cookies from 'cookies';

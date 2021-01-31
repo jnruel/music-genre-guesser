@@ -1,6 +1,5 @@
-
 import Head from 'next/head';
-import styles from '../styles/PageLayout.module.css';
+import styles from '../styles/PageLayout.module.scss';
 
 export default function PageLayout(props) {
   return (
@@ -11,7 +10,7 @@ export default function PageLayout(props) {
       </Head>
 
       <main className={styles.main}>
-        <h1 className={styles.title}>Music Genre Guesser</h1>
+        <h1 className={styles.title}>{props.title}</h1>
         <div>{props.children}</div>
       </main>
 
