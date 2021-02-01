@@ -11,12 +11,12 @@ export default function PageLayout(props) {
 
       <main className={styles.main}>
         <h1 className={styles.title}>{props.title}</h1>
-        <div>{props.children}</div>
+        <div className={styles.pageContentContainer}>{props.children}</div>
       </main>
 
-      <footer className={styles.footer}>
+      {/* <footer className={styles.footer}>
         todo
-      </footer>
+      </footer> */}
     </div>
   );
 }

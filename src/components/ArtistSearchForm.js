@@ -3,8 +3,8 @@ import Autosuggest from 'react-autosuggest';
 import { getArtist } from '../helper/fetch';
 import { debounce } from 'lodash';
 import { AppContext } from '../contexts/AppContext';
-import autoSuggestStyles from  '../styles/AutoSuggest.module.css';
-import artistSearchStyles from  '../styles/ArtistSearchForm.module.css';
+import autoSuggestStyles from  '../styles/AutoSuggest.module.scss';
+import artistSearchStyles from  '../styles/ArtistSearchForm.module.scss';
 
 const renderSuggestion = suggestion => (
   <div>

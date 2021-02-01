@@ -87,10 +87,9 @@ export default function ArtistGenreQuiz(props) {
     <div className={styles.container}>
       <h2>{artist.name} ({artist.genres.length} genres on Spotify)</h2>
       <img src={artist.images[2].url}></img>
+      <h3>Guess the correct Genres</h3>
       <div>Selected {selectedGenres.length} out of {artist.genres.length}</div>
-
-      <h3>Available Genres</h3>
-      <div>
+      <div className={styles.genreButtonContainer}>
         {genres.map((genre, index) => {
           // Disable button if at selection max and not already selected
           // (Allow selected to be clicked in order to deselect)
