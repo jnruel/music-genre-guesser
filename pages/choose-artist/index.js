@@ -19,7 +19,7 @@ function ChooseArtist() {
   return (
     <PageLayout title="Choose an Artist">
       <div className={styles.pageDescription}>
-        Try to guess an artist's listed genres on Spotify amongst the the related artists' genres.
+        Try to guess an artist's listed genres on Spotify amongst their related artists' genres.
       </div>
 
       <nav className={styles.pageNav}>
