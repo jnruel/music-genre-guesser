@@ -1,5 +1,9 @@
 import React, { Component, createContext } from 'react';
 
+// type ClockState = {
+//   time: Date
+// }
+
 export const AppContext = createContext();
 
 export default class AppContextProvider extends Component {

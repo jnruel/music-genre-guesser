@@ -1,10 +1,15 @@
+import App from 'next/app';
+import type { AppProps, AppContext } from 'next/app'
 import '../src/styles/globals.scss'
 import AppContextProvider from '../src/contexts/AppContext';
-import App from 'next/app';
-import Cookies from 'cookies';
 import { getSpotifyAuthData } from '../src/helper/fetch';
+import Cookies from 'cookies';
 
-function MyApp({ Component, pageProps, accessToken }) {
+interface ThisAppProps extends AppProps {
+  accessToken?: string
+}
+
+function MyApp({ Component, pageProps, accessToken }: ThisAppProps) {
   return (
     <AppContextProvider accessToken={accessToken}>
       <Component {...pageProps} />
@@ -12,7 +17,7 @@ function MyApp({ Component, pageProps, accessToken }) {
   );
 }
 
-MyApp.getInitialProps = async (appContext) => {
+MyApp.getInitialProps = async (appContext: AppContext) => {
   let accessToken = null;
 
   const { req, res } = appContext.ctx;
